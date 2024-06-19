@@ -1,4 +1,4 @@
 Hallo, nama saya Arwanda Isman
 
-Motivasi saya mengikuti bootcamp Laravel Web Dev ini adalah agar saya bisa belajar menggunakan bahasa pemrograman PHP dan Framework Laravel.
-Harapan saya setelah mengikuti bootcamp ini adalah semoga saya dapat memahami menggunakan bahasa pemrograman PHP dan Framework Laravel dengan lancar.
+
+Dengan mengikuti bootcamp Laravel, saya harap akan memiliki peluang besar untuk menjadi pengembang web yang sukses dan meraih karir yang menjanjikan di industri yang terus berkembang pesat ini.
