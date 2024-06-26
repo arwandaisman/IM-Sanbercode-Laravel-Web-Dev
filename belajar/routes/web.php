@@ -19,3 +19,18 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'home']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/welcome', [AuthController::class, 'welcome']);
+
+Route::get('/master', function(){
+    return view('layouts.master');
+});
+
+
+Route::get('/data-tables',function(){
+    return view('page.data-table');
+});
+
+Route::get('/table', function(){
+    return view('page.table');
+});
+
+
