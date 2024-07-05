@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CastController;
-
+use App\Http\Controllers\FilmController;
+use App\Http\Controllers\GenreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,3 +57,11 @@ Route::put('/cast/{id}',[CastController::class,'update']);
 
 //delete data
 Route::delete('/cast/{id}',[CastController::class,'destroy']);
+
+
+//CRUD Genre
+Route::resource('genre',GenreController::class);
+
+
+//CRUD Film
+Route::resource('film',FilmController::class);
