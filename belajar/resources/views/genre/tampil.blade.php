@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('tittle')
-    Tambah Data
+    Data Genre
 @endsection
 
 @section('content')

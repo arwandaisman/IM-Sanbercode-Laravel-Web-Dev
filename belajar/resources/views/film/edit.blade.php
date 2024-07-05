@@ -5,33 +5,63 @@
 @endsection
 
 @section('content')
-<a href="/cast" class="btn btn-success btn-sm my-3">Kembali</a>
-    <form method="POST" action="/cast/{{$cast->id}}">
-        @csrf
-        @method('PUT')
+<a href="/film" class="btn btn-success btn-sm my-3">Kembali</a>
+    <form method="POST" action="/film/{{$film->id}}" enctype="multipart/form-data">
+      @method("PUT")
+      @csrf
       <div class="form-group">
-        <label for="nama">Nama:</label>
-        <input type="text" class="form-control" @error('nama') is-invalid @enderror name="nama" value="{{$cast->nama}}">
+        <label>Genre :</label>
+        <select name = "genre_id" class="form-control" id="">
+          <option value = ""> -- Pilih Genre --</option>
+
+          @forelse($genre as $item)
+            @if ($item->id === $film->genre_id)
+              <option value = {{$item->id}} selected>{{$item->nama}} </option>
+            @else 
+              <option value = "{{$item->id}}"> {{$item->nama}} </option>
+            @endif
+
+          @empty
+            <option value = ""> Tidak Ada Genre</option>
+          @endforelse
+        </select>
       </div>
-        @error('nama')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
         
+
+
       <div class="form-group">
-        <label for="umur">Umur:</label>
-        <input type="number" class="form-control" @error('umur') is-invalid @enderror name="umur" value="{{$cast->umur}}">
+        <label for="judul">Judul :</label>
+        <input type="text" class="form-control" @error('judul') is-invalid @enderror name="judul" value="{{$film->judul}}">
       </div>
-        @error('umur')
+        @error('judul')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
       <div class="form-group">
-        <label for="bio">Bio:</label>
-        <textarea class="form-control" @error('bio') is-invalid @enderror name="bio" rows="10" >{{$cast->bio}}</textarea>
+        <label for="ringkasan">Ringkasan :</label>
+        <textarea class="form-control" @error('ringkasan') is-invalid @enderror name="ringkasan" rows="10">{{$film->ringkasan}}</textarea>
       </div>
-        @error('bio')
+        @error('ringkasan')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+
+      <div class="form-group">
+        <label for="tahun">Tahun :</label>
+        <input type="number" class="form-control" @error('tahun') is-invalid @enderror name="tahun" value="{{$film->tahun}}">
+      </div>
+        @error('tahun')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+      <div class="form-group">
+        <label for="poster">Upload Poster :</label>
+        <input type="file" class="form-control" @error('poster') is-invalid @enderror name="poster">
+      </div>
+        @error('poster')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+      
 
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
