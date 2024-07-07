@@ -12,10 +12,21 @@
         <div class="image">
           <img src="{{asset('/template/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
+
+      @auth
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{Auth::user()->name}}</a>
         </div>
+      @endauth
+
+      @guest
+      <div class="info">
+        <a href="#" class="d-block">Belum Login</a>
       </div>
+      @endguest
+
+      </div>
+      
 
       <!-- SidebarSearch Form -->
       <div class="form-inline">
@@ -35,7 +46,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/home" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -44,6 +55,29 @@
             </a>
           </li>
 
+          @auth
+              
+          <li class="nav-item">
+            <a href="/cast" class="nav-link">
+              <p>Cast</p>
+            </a>
+          </li>
+
+          
+          @endauth
+
+          <li class="nav-item">
+            <a href="/genre" class="nav-link">
+              <p>Genre</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/film" class="nav-link">
+              <p>Film</p>
+            </a>
+          </li>
+          
         <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -65,30 +99,31 @@
                   <p>Data Table</p>
                 </a>
               </li>
-
-              <li class="nav-item">
-                <a href="/cast" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Cast</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="/genre" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Genre</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="/film" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Film</p>
-                </a>
-              </li>
-              
             </ul>
           </li>
+          
+          @auth
+              
+          <li class="nav-item bg-danger">
+            <a class="nav-link" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                Logout
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </li>
+        
+        @endauth 
+        
+        @guest
+          <li class="nav-item bg-info">
+            <a href="/login" class="nav-link">
+              <p>Login</p>
+            </a>
+          </li>
+        @endguest
           
         </ul>
       </nav>

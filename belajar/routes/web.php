@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CastController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\CommentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,7 @@ use App\Http\Controllers\GenreController;
 |
 */
 
+Route::get('/home', [HomeController::class, 'home']);
 Route::get('/', [HomeController::class, 'home']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/welcome', [AuthController::class, 'welcome']);
@@ -36,32 +39,41 @@ Route::get('/table', function(){
 });
 
 
-//CRUD Cast
-//Create Data
-Route::get('/cast/create',[CastController::class,'create']);
-//simpan data
-Route::post('/cast',[CastController::class,'store']);
 
-//read data
-//tampil semua cast
-Route::get('/cast',[CastController::class,'index']);
-//detail data
-Route::get('/cast/{id}',[CastController::class,'show']);
+Route::middleware(['auth'])->group(function () {
+       //CRUD Cast
+        //Create Data
+        Route::get('/cast/create',[CastController::class,'create']);
+        //simpan data
+        Route::post('/cast',[CastController::class,'store']);
 
-
-//uodate Data
-Route::get('/cast/{id}/edit',[CastController::class,'edit']);
-//kirim data update
-Route::put('/cast/{id}',[CastController::class,'update']);
+        //read data
+        //tampil semua cast
+        Route::get('/cast',[CastController::class,'index']);
+        //detail data
+        Route::get('/cast/{id}',[CastController::class,'show']);
 
 
-//delete data
-Route::delete('/cast/{id}',[CastController::class,'destroy']);
+        //uodate Data
+        Route::get('/cast/{id}/edit',[CastController::class,'edit']);
+        //kirim data update
+        Route::put('/cast/{id}',[CastController::class,'update']);
 
+
+        //delete data
+        Route::delete('/cast/{id}',[CastController::class,'destroy']); 
+
+
+        Route::post('/comments/{genre_id}',[CommentController::class,'store']); 
+
+});
 
 //CRUD Genre
 Route::resource('genre',GenreController::class);
 
-
 //CRUD Film
 Route::resource('film',FilmController::class);
+
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

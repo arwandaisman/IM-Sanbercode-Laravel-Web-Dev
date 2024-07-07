@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Genre;
 
 class GenreController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index','show']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -44,7 +50,7 @@ class GenreController extends Controller
      */
     public function show(string $id)
     {
-        $genre = DB::table('genre')->find($id);
+        $genre = Genre::find($id);
 
         return view('genre.detail', ['genre' => $genre]);
     }
